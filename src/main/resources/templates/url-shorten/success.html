@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Rút gọn liên kết</title>
+</head>
+<body>
+<!-- ======= ShortUrl Success Section ======= -->
+<div layout:fragment="content"  class="row" >
+    <div class="col col-offset-2">
+        <h1 class="alert alert-success text-center">Rút gọn liên kết thành công</h1>
+        <!--         <% if (errorMessage) { %> -->
+        <!--             <h4 class="alert alert-warning text-center"> -->
+        <!--                 <%= errorMessage %> -->
+        <!--             </h4> -->
+        <!--         <% } %> -->
+        <div class="row g-3 text-center">
+            <div class="col-sm-6 col-md-8">
+                <input id="linkShare" class="form-control" type="text" name="search" value="<%= shortUrl %>">
+            </div>
+            <div class="col">
+                <button id="btnCopy" onclick="copyToClipboard()"  class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nhấn để sao chép liên kết">
+                    Sao chép
+                </button>
+            </div>
+            <div class="col">
+                <a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Nhấn vào để truy cập thử liên kết rút gọn" href="<%= shortUrl %>">
+                    Truy cập
+                </a>
+            </div>
+            <script>
+                function copyToClipboard() {
+                    const copyText = document.getElementById('linkShare');
+                    copyText.select();
+                    document.execCommand("copy");
+                }
+            </script>
+        </div>
+        <div class="mt-5 text-center">
+            <h3>Rút gọn liên kết khác tại <a href="/go">đây</a></h3>
+        </div>
+    </div>
+</div>
+<!-- End ShortUrl Success Section -->
+</body>
+</html>
+

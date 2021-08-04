@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>untitled</title>
+    <meta name="description" content="Nguyễn Thọ Tuấn. Website cá nhân, chia sẻ kiến thức kinh nghiệm với Java & NodeJS. Các kiến thức cơ bản cuộc sống,...">
+    <meta name="keywords" content="nttuan, ngthotuan, Nguyen Tho Tuan, Nguyễn Thọ Tuấn, nodejs, java, upload">
+
+    <link href="/img/favicon.png" rel="icon">
+    <link rel="stylesheet" href="/vendor/fontawesome/css/all.css">
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Main layout-->
+    <main class="main">
+        <div th:replace="fragments/header::header"></div>
+        <div class="container mt-5 pt-3">
+            <!-- Content layout-->
+            <div layout:fragment="content"></div>
+            <!-- End Content layout-->
+        </div>
+    </main>
+    <!-- End Main layout -->
+    <div th:replace="fragments/footer::footer"></div>
+    <!-- Common JS File -->
+    <script src="/vendor/jquery/jquery-3.5.1.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/validator.js"></script>
+    <script src="/js/main.js"></script>
+    <!--Page JS File-->
+    <th:block layout:fragment="script"></th:block>
+</body>
+</html>
