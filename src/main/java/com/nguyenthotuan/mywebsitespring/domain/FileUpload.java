@@ -1,0 +1,22 @@
+package com.nguyenthotuan.mywebsitespring.domain;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "FILE_UPLOAD")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class FileUpload {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String originName;
+    private String saveName;
+    private long size;
+    private String contentType;
+}

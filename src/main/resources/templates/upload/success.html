@@ -10,11 +10,11 @@
 <!-- ======= Upload Success Section ======= -->
 <div layout:fragment="content" class="row" >
 <div class="col col-offset-2">
-    <h1 class="alert alert-success text-center">Tải lên tệp <%= fileName %> thành công</h1>
+    <h1 class="alert alert-success text-center">Tải lên tệp thành công</h1>
     <div class="mt-5 form form-row justify-content-center">
         <div class="row g-3 text-center">
             <div class="col-sm-6 col-md-8">
-                <input id="linkShare" class="form-control" type="text" name="search" value="<%= fileUrl %>">
+                <input id="linkShare" class="form-control" type="text" name="search" th:value="${fileUrl}">
             </div>
             <div class="col">
                 <button id="btnCopy" onclick="copyToClipboard()"  class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nhấn để sao chép liên kết">
@@ -22,7 +22,8 @@
                 </button>
             </div>
             <div class="col">
-                <a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Nhấn vào để tải file về" href="<%= fileUrl %>">
+                <a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Nhấn vào để tải file về"
+                   th:href="@{${fileUrl}}">
                     Tải về
                 </a>
             </div>

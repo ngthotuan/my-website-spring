@@ -9,7 +9,7 @@
     <body>
         <!--Error Section-->
         <div layout:fragment="content" class="row mt-5">
-            <h1 class="error-message text-center">Liên kết không tồn tại!</h1>
+            <h1 class="error-message text-center" th:text="${message}">Liên kết không tồn tại!</h1>
         </div>
         <!-- End Error Section -->
     </body>

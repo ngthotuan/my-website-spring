@@ -27,14 +27,4 @@ public class HomeController {
     public String getRegister() {
         return "home/register";
     }
-
-    @GetMapping("go")
-    public String getGo() {
-        return "url-shorten/index";
-    }
-
-    @GetMapping("upload")
-    public String getUpload() {
-        return "upload/index";
-    }
 }

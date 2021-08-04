@@ -30,4 +30,15 @@ public class MyExceptionHandler {
         System.err.println(ex.getLocalizedMessage());
         return "error/404";
     }
+
+    /**
+     * StorageException Exception
+     */
+    @ExceptionHandler(StorageException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    public String handleStorageException(Exception ex, Model model) {
+        System.err.println(ex.getLocalizedMessage());
+        model.addAttribute("message", ex.getMessage());
+        return "error/404";
+    }
 }
