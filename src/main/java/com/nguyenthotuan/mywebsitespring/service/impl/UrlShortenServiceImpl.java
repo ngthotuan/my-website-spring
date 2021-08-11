@@ -27,7 +27,7 @@ public class UrlShortenServiceImpl implements UrlShortenService {
         if (!s.getFullUrl().startsWith("http")) {
             s.setFullUrl(String.format("http://%s", s.getFullUrl()));
         }
-        if (s.getShortUrl().isBlank()) {
+        if (s.getShortUrl().isEmpty()) {
             s.setShortUrl(randomShortUrl());
         }
         if (s.getId() == null) {

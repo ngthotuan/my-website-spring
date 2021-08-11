@@ -22,7 +22,7 @@ public class FileSystemStorageServiceImpl implements StorageService {
     private final Path rootLocation;
 
     public FileSystemStorageServiceImpl(AppProperties properties) {
-        this.rootLocation = Path.of(properties.getUploadLocation());
+        this.rootLocation = Paths.get(properties.getUploadLocation());
     }
 
     private Optional<String> getFileExtension(String filename) {
