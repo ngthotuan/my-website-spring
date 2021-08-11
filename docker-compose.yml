@@ -3,7 +3,10 @@ version: '3.8'
 services:
   app:
     build: .
-    image: ngthotuan/my-website-spring
+    image: ${IMAGE}
     container_name: my-website-spring
+    restart: unless-stopped
     ports:
       - '8000:8080'
+    env_file:
+      - .env

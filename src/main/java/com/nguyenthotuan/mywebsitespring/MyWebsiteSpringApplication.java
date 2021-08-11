@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
+import javax.annotation.PostConstruct;
+
 @SpringBootApplication
 @EnableConfigurationProperties
 public class MyWebsiteSpringApplication {
@@ -15,6 +17,7 @@ public class MyWebsiteSpringApplication {
     CommandLineRunner init(StorageService storageService) {
         return args -> {
             storageService.init();
+
         };
     }
 

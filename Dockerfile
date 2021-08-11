@@ -10,4 +10,8 @@ RUN ./mvnw dependency:go-offline
 
 COPY src ./src
 
+ENV DB_CONNECTION_STRING=jdbc:mysql://localhost:3306/web_db
+ENV DB_USER=root
+ENV DB_PASSWORD=root
+
 CMD ["./mvnw", "spring-boot:run"]
