@@ -8,7 +8,8 @@
 <nav th:fragment="header" class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand text-uppercase" href="/" th:text="${@environment.getProperty('app.hostName')}">NGUYENTHOTUAN.ME</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -20,28 +21,37 @@
                     <a class="nav-link" href="/blog">Blog</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Tiện ích</a>
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Tiện
+                        ích</a>
                     <ul class="dropdown-menu">
-<!--                        <li><a class="dropdown-item" href="/read-article">Đọc báo</a></li>-->
+                        <!--                        <li><a class="dropdown-item" href="/read-article">Đọc báo</a></li>-->
                         <li><a class="dropdown-item" href="/upload">Tải lên</a></li>
                         <li><a class="dropdown-item" href="/go">Rút gọn liên kết</a></li>
                     </ul>
                 </li>
-<!--                <li class="nav-item dropdown">-->
-<!--                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Liên kết</a>-->
-<!--                    <ul class="dropdown-menu">-->
-<!--                         <li><a class="dropdown-item" href="https://mysql.nguyenthotuan.me/" target="_blank">MySQL</a></li>-->
-<!--                        <li><a class="dropdown-item" href="https://mongo.nguyenthotuan.me/" target="_blank">MongoDB</a></li>-->
-<!--                         <li><a class="dropdown-item" href="https://db.nguyenthotuan.me/" target="_blank">Connect DB</a></li>-->
-<!--                    </ul>-->
-<!--                </li>-->
+                <!--                <li class="nav-item dropdown">-->
+                <!--                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Liên kết</a>-->
+                <!--                    <ul class="dropdown-menu">-->
+                <!--                         <li><a class="dropdown-item" href="https://mysql.nguyenthotuan.me/" target="_blank">MySQL</a></li>-->
+                <!--                        <li><a class="dropdown-item" href="https://mongo.nguyenthotuan.me/" target="_blank">MongoDB</a></li>-->
+                <!--                         <li><a class="dropdown-item" href="https://db.nguyenthotuan.me/" target="_blank">Connect DB</a></li>-->
+                <!--                    </ul>-->
+                <!--                </li>-->
                 <li class="nav-item">
                     <a class="nav-link" href="/contact">Liên hệ</a>
                 </li>
             </ul>
-            <a href="/login">
+            <a th:unless="${session.username}" href="/login">
                 <button class="btn btn-outline-success">Đăng nhập</button>
             </a>
+            <div th:if="${session.username}">
+                <button class="btn btn-outline-disabled text-light">
+                    Hi, <span th:text="${session.name}">name</span>
+                </button>
+                <a href="/logout">
+                    <button class="btn btn-outline-danger">Đăng xuất</button>
+                </a>
+            </div>
         </div>
     </div>
 </nav>

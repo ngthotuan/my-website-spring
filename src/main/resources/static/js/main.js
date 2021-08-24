@@ -32,7 +32,7 @@ $(function() {
             Validator.isRequired('#email', 'Vui lòng nhập Email'),
             Validator.isEmail('#email', 'Địa chỉ email không đúng định dạng'),
             Validator.isRequired('#password', 'Vui lòng nhập mật khẩu'),
-            Validator.minLength('#password', 6, 'Mật khẩu tối thiểu 6 ký tự'),
+            Validator.minLength('#password', 8, 'Mật khẩu tối thiểu 8 ký tự'),
             Validator.isRequired('#password2', 'Vui lòng xác nhận mật khẩu'),
             Validator.isConfirmed(
                 '#password2',

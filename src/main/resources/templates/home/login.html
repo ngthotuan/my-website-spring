@@ -4,44 +4,64 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
-  <title>Đăng nhập</title>
+    <title>Đăng nhập</title>
 </head>
 <body>
 <!--Login Section-->
 <div layout:fragment="content" class="row mt-5">
-  <div class="col-md-6 m-auto">
-    <div class="card card-body">
-      <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Đăng nhập</h1>
-      <form id="formLogin" action="/login" method="POST">
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  class="form-control"
-                  placeholder="Địa chỉ email"
-          />
-          <div class="d-block invalid-feedback"></div>
+    <div class="col-md-6 m-auto">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="text-center">
+                    <i class="fas fa-sign-in-alt"></i> Đăng nhập
+                </h1>
+            </div>
+            <div class="card-body">
+                <div th:if="${message}" class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <span th:text="${message}">Message</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <form id="formLogin" action="/login" method="POST" th:object="${user}">
+                    <div class="form-group">
+                        <label class="my-2" for="email">Email</label>
+                        <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Địa chỉ email"
+                                th:field="*{email}"
+                                th:class="${#fields.hasErrors('email')} ? 'form-control is-invalid' : 'form-control' "
+                        />
+                        <div class="d-block invalid-feedback">
+                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email không hợp lệ</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="my-2" for="password">Mật khẩu</label>
+                        <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Mật khẩu của bạn"
+                                th:field="*{password}"
+                                th:class="${#fields.hasErrors('password')} ? 'form-control is-invalid' : 'form-control' "
+                        />
+                        <div class="d-block invalid-feedback">
+                            <span th:if="${#fields.hasErrors('password')}"
+                                  th:errors="*{password}">Mật khẩu 8-20 ký tự</span>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg my-2">Đăng nhập
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <p class="">Chưa có khoản <a href="/register">Đăng ký</a></p>
+            </div>
         </div>
-        <div class="form-group">
-          <label for="password">Mật khẩu</label>
-          <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  class="form-control"
-                  placeholder="Nhập mật khẩu"
-          />
-          <div class="d-block invalid-feedback"></div>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
-      </form>
-      <p class="lead mt-4">
-        Chưa có tài khoản? <a href="/register">Đăng ký</a>
-      </p>
     </div>
-  </div>
 </div>
 <!-- End Login Section -->
 </body>

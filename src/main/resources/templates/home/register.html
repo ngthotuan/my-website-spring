@@ -4,72 +4,85 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
-  <title>Đăng ký</title>
+    <title>Đăng ký</title>
 </head>
 <body>
 <!--Register Section-->
 <div layout:fragment="content" class="row mt-5">
-  <div class="col-md-6 m-auto">
-    <div class="card card-body">
-      <h1 class="text-center mb-3">
-        <i class="fas fa-user-plus"></i> Đăng ký
-      </h1>
-      <form id="formRegister" action="/register" method="POST">
-        <div class="form-group">
-          <label for="name">Tên của bạn</label>
-          <input
-                  type="name"
-                  id="name"
-                  name="name"
-                  class="form-control"
-                  placeholder="Nhập tên"
-                  value=""
-          />
-          <div class="d-block invalid-feedback"></div>
+    <div class="col-md-6 m-auto">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="text-center">
+                    <i class="fas fa-user-plus"></i> Đăng ký
+                </h1>
+            </div>
+            <div class="card-body">
+                <form id="formRegister" action="/register" method="POST" th:object="${user}">
+                    <div class="form-group">
+                        <label class="my-2" for="name">Tên của bạn</label>
+                        <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Nhập tên 10 - 50 ký tự"
+                                th:field="*{name}"
+                                th:class="${#fields.hasErrors('name')} ? 'form-control is-invalid' : 'form-control' "
+                        />
+                        <div class="d-block invalid-feedback">
+                            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Nhập tên 10 - 50 ký tự</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="my-2" for="email">Email</label>
+                        <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="example@domain.com"
+                                th:field="*{email}"
+                                th:class="${#fields.hasErrors('email')} ? 'form-control is-invalid' : 'form-control' "
+                        />
+                        <div class="d-block invalid-feedback">
+                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email không hợp lệ</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="my-2" for="password">Mật khẩu</label>
+                        <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Mật khẩu 8-20 ký tự"
+                                th:field="*{password}"
+                                th:class="${#fields.hasErrors('password')} ? 'form-control is-invalid' : 'form-control' "
+                        />
+                        <div class="d-block invalid-feedback">
+                            <span th:if="${#fields.hasErrors('password')}"
+                                  th:errors="*{password}">Mật khẩu 8-20 ký tự</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="my-2" for="password2">Nhập lại mật khẩu</label>
+                        <input
+                                type="password"
+                                id="password2"
+                                name="password2"
+                                class="form-control"
+                                placeholder="Xác nhận mật khẩu"
+                        />
+                        <div class="d-block invalid-feedback"></div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success btn-lg my-2"><i class="fa fa-plus"></i> Đăng ký
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <p class="">Bạn đã có tài khoản? <a href="/login">Đăng nhập</a></p>
+            </div>
         </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  class="form-control"
-                  placeholder="Nhập địa chỉ email"
-                  value=""
-          />
-          <div class="d-block invalid-feedback"></div>
-        </div>
-        <div class="form-group">
-          <label for="password">Mật khẩu</label>
-          <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  class="form-control"
-                  placeholder="Nhập mật khẩu"
-                  value=""
-          />
-          <div class="d-block invalid-feedback"></div>
-        </div>
-        <div class="form-group">
-          <label for="password2">Nhập lại mật khẩu</label>
-          <input
-                  type="password"
-                  id="password2"
-                  name="password2"
-                  class="form-control"
-                  placeholder="Xác nhận mật khẩu"
-                  value=""
-          />
-          <div class="d-block invalid-feedback"></div>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">
-          Đăng ký
-        </button>
-      </form>
-      <p class="lead mt-4">Bạn đã có tài khoản? <a href="/login">Đăng nhập</a></p>
     </div>
-  </div>
 </div>
 <!-- End Register Section -->
 </body>
