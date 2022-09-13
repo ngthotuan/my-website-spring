@@ -23,7 +23,7 @@
       <div class="col-lg-4 mt-4 mt-lg-0">
         <i class="icofont-envelope"></i>
         <h4>Email:</h4>
-        <p>contact@nguyenthotuan.me</p>
+        <p>contact@<span th:text="${@environment.getProperty('app.hostName')}">nguyenthotuan.me</span></p>
       </div>
 
       <div class="col-lg-4 mt-4 mt-lg-0">

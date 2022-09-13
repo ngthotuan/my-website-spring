@@ -25,6 +25,8 @@ WORKDIR /app
 ENV DB_CONNECTION_STRING=jdbc:mysql://localhost:3306/web_db
 ENV DB_USER=root
 ENV DB_PASSWORD=root
+ENV APP_HOST_NAME=localhost:8080
+ENV APP_UPLOAD_LOCATION=user-upload
 
 EXPOSE 8080
 COPY --from=build /app/target/*.jar ./
