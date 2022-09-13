@@ -30,7 +30,7 @@ public class BlogController {
         return "blog/index";
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public String getBlogDetail(Model model, @PathVariable String id) {
         model.addAttribute("id", id);
         return "blog/detail";

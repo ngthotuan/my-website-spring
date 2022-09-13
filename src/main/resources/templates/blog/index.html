@@ -34,15 +34,17 @@
 <!--                    </div>-->
 <!--                </div>-->
                 <!-- Nested row for non-featured blog posts-->
-                <div th:each="article: ${articles}" class="row">
-                    <div class="col-lg-6">
+                <div class="row">
+                    <div th:each="article: ${articles}" class="col-lg-6">
                         <div class="card mb-4 h-100">
-                            <a th:href="'' + ${article.slug}"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                            <a th:href="'/blog/' + ${article.slug}">
+                                <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg"
+                                     th:alt="${article.shortDescription}" /></a>
                             <div class="card-body">
                                 <div class="small text-muted">[[${article.createdAt}]]</div>
                                 <h2 class="card-title h4">[[${article.title}]]</h2>
                                 <p class="card-text">[[${article.shortDescription}]]</p>
-                                <a class="btn btn-primary" href="#!">Xem chi tiết</a>
+                                <a class="btn btn-primary" th:href="'/blog/' + ${article.slug}">Xem chi tiết</a>
                             </div>
                         </div>
                     </div>
