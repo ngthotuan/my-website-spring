@@ -44,6 +44,7 @@
                             <h2 class="card-title h4">[[${article.title}]]</h2>
                             <p class="card-text">[[${article.shortDescription}]]</p>
                             <a class="btn btn-primary" th:href="'/blog/' + ${article.slug}">Xem chi tiết</a>
+                            <a class="btn btn-secondary" th:href="'admin/blog/edit/' + ${article.id}">Sửa</a>
                         </div>
                     </div>
                 </div>

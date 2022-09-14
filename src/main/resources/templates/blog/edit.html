@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Chỉnh sửa bài viết</title>
+</head>
+<body>
+<!-- Blog detail Section-->
+<div layout:fragment="content">
+    <div class="row mt-5 justify-content-center">
+        <div class="col">
+            <form class="card card-body" enctype="application/x-www-form-urlencoded" th:action="'/admin/blog/edit/' + ${article.id}" method="POST">
+                <h2 class="text-center text-info my-3">Sửa bài viết</h2>
+                <div class="row my-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input id="title" name="title" class="form-control" placeholder="Tiêu đề" th:value="${article.title}">
+                            <label for="title">Tiêu đề</label>
+                            <div class="d-block invalid-feedback"></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" id="Slug" name="Slug" placeholder="Slug" th:value="${article.slug}">
+                            <label for="Slug">Slug</label>
+                            <div class="d-block invalid-feedback"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating my-3">
+                    <input type="text" class="form-control" id="shortDescription" name="shortDescription" placeholder="Mô tả ngắn" th:value="${article.shortDescription}">
+                    <label for="shortDescription">Mô tả ngắn</label>
+                    <div class="d-block invalid-feedback"></div>
+                </div>
+                <div class="my-3">
+                    <textarea id="content" name="content" class="form-control" placeholder="Nội dung" th:utext="${article.content}"></textarea>
+                </div>
+                <div class="form-group text-center mt-2">
+                    <button type="submit" class="btn btn-success btn-lg">Cập nhật</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<th:block layout:fragment="script">
+    <script th:src="@{/webjars/tinymce/5.0.9/tinymce.min.js}"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            // width: 600,
+            height: 450,
+            plugins: [
+                'advlist autolink link image lists charmap print preview hr anchor pagebreak',
+                'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+                'table emoticons template paste help'
+            ],
+            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | ' +
+                'bullist numlist outdent indent | link image | print preview media fullscreen | ' +
+                'forecolor backcolor emoticons | help',
+            menubar: 'file edit view insert format tools table help',
+            menu: {
+                file: { title: 'File', items: 'newdocument restoredraft | preview | print ' },
+                edit: { title: 'Edit', items: 'undo redo | cut copy paste | selectall | searchreplace' },
+                view: { title: 'View', items: 'code | visualaid visualchars visualblocks | spellchecker | preview fullscreen' },
+                insert: { title: 'Insert', items: 'image link media template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime' },
+                format: { title: 'Format', items: 'bold italic underline strikethrough superscript subscript codeformat | formats blockformats fontformats fontsizes align lineheight | forecolor backcolor | removeformat' },
+                tools: { title: 'Tools', items: 'spellchecker spellcheckerlanguage | code wordcount' },
+                table: { title: 'Table', items: 'inserttable | cell row column | tableprops deletetable' },
+                help: { title: 'Help', items: 'help' }
+            },
+            statusbar: false,
+            paste_data_images: true,
+            images_upload_url: '/upload/blog',
+        });
+    </script>
+</th:block>
+<!-- Blog detail Section -->
+</body>
+</html>

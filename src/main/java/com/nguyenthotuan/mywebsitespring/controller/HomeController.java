@@ -89,6 +89,7 @@ public class HomeController {
         Object ruri = session.getAttribute("redirect-uri");
         session.setAttribute("username", user.getEmail());
         session.setAttribute("name", user.getName());
+        session.setAttribute("role", user.getRole());
         if (ruri != null) {
             session.removeAttribute("redirect-uri");
             return String.format("redirect:%s", ruri);

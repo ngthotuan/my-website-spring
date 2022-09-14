@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -35,6 +37,23 @@ public class UploadController {
     @PostMapping
     public String index(Model model, FileUploadDto fileUploadDto) {
         //store file
+        FileUpload fileUpload = doSaveFile(fileUploadDto);
+
+        model.addAttribute("fileUrl", String.format("http://%s/upload/%s", appProperties.getHostName(), fileUpload.getSaveName()));
+        return "upload/success";
+    }
+
+    @PostMapping("/blog")
+    public ResponseEntity<?> blogUploadImage(FileUploadDto fileUploadDto) {
+        FileUpload fileUpload = doSaveFile(fileUploadDto);
+
+        Map<String, String> result = new HashMap<>();
+        result.put("location", String.format("/upload/%s", fileUpload.getSaveName()));
+        return ResponseEntity.ok(result);
+    }
+
+    private FileUpload doSaveFile(FileUploadDto fileUploadDto) {
+        //store file
         MultipartFile file = fileUploadDto.getFile();
         String fileName = file.getOriginalFilename();
         String storeName = storageService.getStorageFilename(file);
@@ -47,9 +66,7 @@ public class UploadController {
         fileUpload.setSize(file.getSize());
         fileUpload.setContentType(file.getContentType());
         fileUploadService.save(fileUpload);
-
-        model.addAttribute("fileUrl", String.format("http://%s/upload/%s", appProperties.getHostName(), fileUpload.getSaveName()));
-        return "upload/success";
+        return fileUpload;
     }
 
     @GetMapping("{fileName}")
