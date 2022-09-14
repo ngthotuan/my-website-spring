@@ -32,6 +32,6 @@ public class Article {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "article_category",
             joinColumns = @JoinColumn(name = "article_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories;
 }

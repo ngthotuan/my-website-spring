@@ -8,41 +8,43 @@
 </head>
 <body>
 <!--Url Shorten Section-->
-<div layout:fragment="content" class="row mt-4">
-    <div class="col-md-8 offset-md-2">
-        <div class="card">
-            <div class="card-header text-center">
-                <h2>Rút gọn liên kết</h2>
-            </div>
-            <div class="card-body">
-                <div th:if="${message != null}" class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <span th:text="${message}"></span>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<div layout:fragment="content">
+    <div class="row mt-4">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2>Rút gọn liên kết</h2>
                 </div>
-                <form id="formUrlShorten" action="/go" method="POST">
-                    <div class="form-group">
-                        <label for="fullUrl" class="col-form-label">Liên kết gốc *</label>
-                        <input type="text" class="form-control" id="fullUrl" name="fullUrl" autocomplete="off"
-                               placeholder="Nhập địa chỉ muốn rút gọn...">
-                        <div class="d-block invalid-feedback"></div>
+                <div class="card-body">
+                    <div th:if="${message != null}" class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <span th:text="${message}"></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    <div class="form-group">
-                        <label for="shortUrl" class="col-form-label">Tùy chỉnh liên kết</label>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text"
-                                  th:text="${@environment.getProperty('app.hostName')} + '/go/'">nguyenthotuan.me/go/</span>
-                            <input type="text" class="form-control" id="shortUrl" name="shortUrl"
-                                   placeholder="Tùy chọn (Không bắt buộc)">
+                    <form id="formUrlShorten" action="/go" method="POST">
+                        <div class="form-group">
+                            <label for="fullUrl" class="col-form-label">Liên kết gốc *</label>
+                            <input type="text" class="form-control" id="fullUrl" name="fullUrl" autocomplete="off"
+                                   placeholder="Nhập địa chỉ muốn rút gọn...">
+                            <div class="d-block invalid-feedback"></div>
                         </div>
-                        <div class="d-block invalid-feedback"></div>
-                    </div>
-                    <div class="form-group text-center mt-2">
-                        <button type="submit" class="btn btn-success btn-lg">Rút gọn liên kết</button>
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <label for="shortUrl" class="col-form-label">Tùy chỉnh liên kết</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"
+                                      th:text="${@environment.getProperty('app.hostName')} + '/go/'">nguyenthotuan.me/go/</span>
+                                <input type="text" class="form-control" id="shortUrl" name="shortUrl"
+                                       placeholder="Tùy chọn (Không bắt buộc)">
+                            </div>
+                            <div class="d-block invalid-feedback"></div>
+                        </div>
+                        <div class="form-group text-center mt-2">
+                            <button type="submit" class="btn btn-success btn-lg">Rút gọn liên kết</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
 
+        </div>
     </div>
 </div>
 <!--End Shorten Section-->

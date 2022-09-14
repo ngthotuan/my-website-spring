@@ -76,6 +76,12 @@
             <artifactId>font-awesome</artifactId>
             <version>5.15.4</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.webjars/tinymce -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>tinymce</artifactId>
+            <version>5.0.9</version>
+        </dependency>
     </dependencies>
 
     <build>
