@@ -30,9 +30,14 @@ public class BlogController {
         return "blog/index";
     }
 
-    @GetMapping("/{id}")
-    public String getBlogDetail(Model model, @PathVariable String id) {
-        model.addAttribute("id", id);
+    @GetMapping("/{slug}")
+    public String getBlogDetail(Model model, @PathVariable String slug) {
+        Article article = articleService.findBySlug(slug);
+        if (article == null) {
+            return "redirect:/blog";
+        }
+        model.addAttribute("article", article);
+        model.addAttribute("categories", categoryService.findAll());
         return "blog/detail";
     }
 }

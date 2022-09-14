@@ -19,4 +19,9 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> findAll() {
         return repo.findAll();
     }
+
+    @Override
+    public Article findBySlug(String slug) {
+        return repo.findBySlug(slug);
+    }
 }

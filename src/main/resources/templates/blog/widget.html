@@ -23,7 +23,7 @@
         <div class="card-body">
             <ul class="list-inline">
                 <li th:each="category:${categories}" class="list-inline-item">
-                    <a th:href="'/?category=' + ${category.slug}">[[${category.name}]]</a>
+                    <a th:href="'?category=' + ${category.slug}">[[${category.name}]]</a>
                 </li>
             </ul>
         </div>
