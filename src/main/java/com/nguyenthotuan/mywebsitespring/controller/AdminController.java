@@ -1,7 +1,6 @@
 package com.nguyenthotuan.mywebsitespring.controller;
 
 import com.nguyenthotuan.mywebsitespring.domain.blog.Article;
-import com.nguyenthotuan.mywebsitespring.model.ArticleDto;
 import com.nguyenthotuan.mywebsitespring.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -28,12 +27,17 @@ public class AdminController {
     }
 
     @PostMapping(value="/blog/edit/{id}")
-    public String editArticle(@PathVariable Long id, @RequestBody ArticleDto articleDto) {
+    public String editArticle(@PathVariable Long id,
+                              @RequestParam String title,
+                              @RequestParam String slug,
+                              @RequestParam String content,
+                              @RequestParam String shortDescription
+                              ) {
         Article article = articleService.findById(id);
-        article.setTitle(articleDto.getTitle());
-        article.setSlug(articleDto.getSlug());
-        article.setContent(articleDto.getContent());
-        article.setShortDescription(articleDto.getShortDescription());
+        article.setTitle(title);
+        article.setSlug(slug);
+        article.setContent(content);
+        article.setShortDescription(shortDescription);
         articleService.save(article);
         return "redirect:/blog";
     }

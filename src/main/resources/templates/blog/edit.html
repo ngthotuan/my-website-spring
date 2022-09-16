@@ -11,7 +11,7 @@
 <div layout:fragment="content">
     <div class="row mt-5 justify-content-center">
         <div class="col">
-            <form class="card card-body" enctype="application/x-www-form-urlencoded" th:action="'/admin/blog/edit/' + ${article.id}" method="POST">
+            <form id="formEditArticle" class="card card-body" enctype="multipart/form-data" th:action="'/admin/blog/edit/' + ${article.id}" method="POST">
                 <h2 class="text-center text-info my-3">Sửa bài viết</h2>
                 <div class="row my-3">
                     <div class="col">
@@ -23,8 +23,8 @@
                     </div>
                     <div class="col">
                         <div class="form-floating">
-                            <input class="form-control" type="text" id="Slug" name="Slug" placeholder="Slug" th:value="${article.slug}">
-                            <label for="Slug">Slug</label>
+                            <input class="form-control" type="text" id="slug" name="slug" placeholder="Slug" th:value="${article.slug}">
+                            <label for="slug">Slug</label>
                             <div class="d-block invalid-feedback"></div>
                         </div>
                     </div>
