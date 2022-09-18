@@ -34,14 +34,19 @@
             <!--                </div>-->
             <!-- Nested row for non-featured blog posts-->
             <div class="row">
+                <div th:if="${articles.size() == 0}">
+                    <h3>Không có bài viết nào</h3>
+                </div>
                 <div th:each="article: ${articles}" class="col-lg-6">
                     <div class="card mb-4 h-100">
                         <a th:href="'/blog/' + ${article.slug}">
                             <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg"
                                  th:alt="${article.shortDescription}" /></a>
                         <div class="card-body">
-                            <div class="small text-muted">[[${article.createdAt}]]</div>
-                            <h2 class="card-title h4">[[${article.title}]]</h2>
+                            <div class="small text-muted">Sứa đổi lần cuối: [[${article.createdAt}]]</div>
+                            <h2 class="card-title h4"><a th:href="'/blog/' + ${article.slug}">
+                                [[${article.title}]]
+                            </a></h2>
                             <p class="card-text">[[${article.shortDescription}]]</p>
                             <a class="btn btn-primary" th:href="'/blog/' + ${article.slug}">Xem chi tiết</a>
                             <a class="btn btn-secondary" th:href="'admin/blog/edit/' + ${article.id}">Sửa</a>
@@ -50,7 +55,7 @@
                 </div>
             </div>
             <!-- Pagination-->
-            <nav aria-label="Pagination">
+            <nav aria-label="Pagination" th:if="${articles.size() != 0}">
                 <hr class="my-0" />
                 <ul class="pagination justify-content-center my-4">
                     <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a></li>

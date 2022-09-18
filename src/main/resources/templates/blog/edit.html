@@ -11,7 +11,8 @@
 <div layout:fragment="content">
     <div class="row mt-5 justify-content-center">
         <div class="col">
-            <form id="formEditArticle" class="card card-body" enctype="multipart/form-data" th:action="'/admin/blog/edit/' + ${article.id}" method="POST">
+            <form id="formEditArticle" class="card card-body" enctype="multipart/form-data"
+                  th:action="'/admin/blog/edit/' + ${article.id != null ? article.id : ''}" method="POST">
                 <h2 class="text-center text-info my-3">Sửa bài viết</h2>
                 <div class="row my-3">
                     <div class="col">
@@ -30,12 +31,36 @@
                     </div>
                 </div>
                 <div class="form-floating my-3">
+                    <input type="file" class="form-control" id="image" accept="image/*">
+                    <label for="image" class="p-2">Image</label>
+                    <div class="d-block invalid-feedback"></div>
+                </div>
+                <div class="form-floating my-3">
                     <input type="text" class="form-control" id="shortDescription" name="shortDescription" placeholder="Mô tả ngắn" th:value="${article.shortDescription}">
                     <label for="shortDescription">Mô tả ngắn</label>
                     <div class="d-block invalid-feedback"></div>
                 </div>
+                <div class="row gx-3 gy-2 align-items-center">
+                    <label class="form-label">Danh mục</label>
+                    <div th:each="category : ${categories}" class="col-auto">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox"
+                                   name="categories"
+                                   th:value="${category.id}"
+                                   th:id="'category-' + ${category.id}"
+                                   th:checked="${article.categories.contains(category)}">
+                            <label class="form-check-label" th:for="'category-' + ${category.id}">
+                                [[${category.name}]]
+                            </label>
+                        </div>
+                    </div>
+                </div>
                 <div class="my-3">
                     <textarea id="content" name="content" class="form-control" placeholder="Nội dung" th:utext="${article.content}"></textarea>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="published" name="published" th:checked="${article.published}">
+                    <label class="form-check-label" for="published"> Xuất bản</label>
                 </div>
                 <div class="form-group text-center mt-2">
                     <button type="submit" class="btn btn-success btn-lg">Cập nhật</button>
@@ -75,6 +100,13 @@
             paste_data_images: true,
             images_upload_url: '/upload/blog',
         });
+        $('#title').keyup(function () {
+            let slug = $('#slug');
+            let title = $(this).val();
+            let slugValue = slugify(title);
+            slug.val(slugValue);
+        });
+
     </script>
 </th:block>
 <!-- Blog detail Section -->

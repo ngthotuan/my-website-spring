@@ -4,10 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,4 +18,8 @@ public class Category {
 
     private String slug;
     private String name;
+
+    @ManyToMany(mappedBy = "categories")
+    @ToString.Exclude
+    private List<Article> articles;
 }

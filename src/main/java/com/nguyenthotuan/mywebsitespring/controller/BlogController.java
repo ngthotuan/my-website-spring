@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -22,9 +23,14 @@ public class BlogController {
     private final ArticleService articleService;
 
     @GetMapping
-    public String getBlog(Model model) {
+    public String getBlogs(Model model, @RequestParam(required = false) String category) {
         List<Category> categories = categoryService.findAll();
-        List<Article> articles = articleService.findAll();
+        List<Article> articles;
+        if (category != null) {
+            articles = categoryService.findPublishedByCategory(category);
+        } else {
+            articles = articleService.findAllPublished();
+        }
         model.addAttribute("categories", categories);
         model.addAttribute("articles", articles);
         return "blog/index";
@@ -33,7 +39,7 @@ public class BlogController {
     @GetMapping("/{slug}")
     public String getBlogDetail(Model model, @PathVariable String slug) {
         Article article = articleService.findBySlug(slug);
-        if (article == null) {
+        if (article == null || !article.isPublished()) {
             return "redirect:/blog";
         }
         model.addAttribute("article", article);

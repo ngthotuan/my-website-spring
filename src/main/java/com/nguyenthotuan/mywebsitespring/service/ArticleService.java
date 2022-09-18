@@ -7,6 +7,8 @@ import java.util.List;
 public interface ArticleService {
     List<Article> findAll();
 
+    List<Article> findAllPublished();
+
     Article findBySlug(String slug);
 
     Article findById(Long id);
