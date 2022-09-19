@@ -1,13 +1,14 @@
 package com.nguyenthotuan.mywebsitespring.service;
 
 import com.nguyenthotuan.mywebsitespring.domain.blog.Article;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface ArticleService {
-    List<Article> findAll();
+    Page<Article> findAll(Pageable pageable);
 
-    List<Article> findAllPublished();
+    Page<Article> findAllPublished(Pageable pageable);
+    Page<Article> findAllPublishedByCategory(String categorySlug, Pageable pageable);
 
     Article findBySlug(String slug);
 

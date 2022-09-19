@@ -37,8 +37,8 @@
                 <div th:if="${articles.size() == 0}">
                     <h3>Không có bài viết nào</h3>
                 </div>
-                <div th:each="article: ${articles}" class="col-lg-6">
-                    <div class="card mb-4 h-100">
+                <div th:each="article: ${articles}" class="col-lg-6 mb-4">
+                    <div class="card h-100">
                         <a th:href="'/blog/' + ${article.slug}">
                             <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg"
                                  th:alt="${article.shortDescription}" /></a>
@@ -49,22 +49,24 @@
                             </a></h2>
                             <p class="card-text">[[${article.shortDescription}]]</p>
                             <a class="btn btn-primary" th:href="'/blog/' + ${article.slug}">Xem chi tiết</a>
-                            <a class="btn btn-secondary" th:href="'admin/blog/edit/' + ${article.id}">Sửa</a>
+                            <a class="btn btn-secondary" th:href="'/admin/blog/edit/' + ${article.id}">Sửa</a>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Pagination-->
             <nav aria-label="Pagination" th:if="${articles.size() != 0}">
-                <hr class="my-0" />
                 <ul class="pagination justify-content-center my-4">
-                    <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a></li>
-                    <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                    <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
-                    <li class="page-item"><a class="page-link" href="#!">15</a></li>
-                    <li class="page-item"><a class="page-link" href="#!">Older</a></li>
+                    <li th:class="'page-item ' + ${page == 1 ? 'disabled' : ''}">
+                        <a class="page-link" th:href="'/blog?page=1' + '&size=' + ${size} + ${category != null ? '&category=' + category : ''}">Đầu</a>
+                    </li>
+                    <li th:each="p: ${#numbers.sequence(1, totalPages)}"
+                        th:class="'page-item ' + ${p == page ? 'active' : ''}">
+                        <a class="page-link" th:href="'/blog?page=' + ${p} + '&size=' + ${size} + ${category != null ? '&category=' + category : ''}">[[${p}]]</a>
+                    </li>
+                    <li th:class="'page-item ' + ${page == totalPages ? 'disabled' : ''}">
+                        <a class="page-link" th:href="'/blog?page=' + ${totalPages} + '&size=' + ${size} + ${category != null ? '&category=' + category : ''}">Cuối</a>
+                    </li>
                 </ul>
             </nav>
         </div>

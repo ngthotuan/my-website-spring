@@ -5,9 +5,9 @@ import com.nguyenthotuan.mywebsitespring.domain.blog.Article;
 import com.nguyenthotuan.mywebsitespring.repository.ArticleRepository;
 import com.nguyenthotuan.mywebsitespring.service.ArticleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -16,13 +16,18 @@ public class ArticleServiceImpl implements ArticleService {
     private final ArticleRepository repo;
 
     @Override
-    public List<Article> findAll() {
-        return repo.findAll();
+    public Page<Article> findAll(Pageable pageable) {
+        return repo.findAll(pageable);
     }
 
     @Override
-    public List<Article> findAllPublished() {
-        return repo.findAllByPublished(true);
+    public Page<Article> findAllPublished(Pageable pageable) {
+        return repo.findAllByPublished(true, pageable);
+    }
+
+    @Override
+    public Page<Article> findAllPublishedByCategory(String categorySlug, Pageable pageable) {
+        return repo.findByPublishedAndCategories_Slug(true, categorySlug, pageable);
     }
 
     @Override

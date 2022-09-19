@@ -9,6 +9,10 @@ body {
     margin: 0 auto 3em;
 }
 
+img {
+    width: 100%;
+}
+
 .img-card {
     height: 200px;
 }
