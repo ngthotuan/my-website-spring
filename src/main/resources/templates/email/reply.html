@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Rep: [[${subject}]]</title>
+        <title>Rep: [[${contactMessage.subject}]]</title>
         <meta name="viewport" content="width=device-width" />
        <style type="text/css">
             @media only screen and (max-width: 550px), screen and (max-device-width: 550px) {
@@ -30,7 +30,7 @@
                         <tr>
                             <td align="center" style="color: #aaaaaa; font-family: Arial, sans-serif; font-size: 12px;">
                                 Email hiện thị không đúng ?
-                                <a th:href="${@environment.getProperty('app.hostProtocol')} + '://' + ${@environment.getProperty('app.hostName')}" style="color: #27ae60;">
+                                <a th:href="${appProps.hostProtocol} + '://' + ${appProps.hostName}" style="color: #27ae60;">
                                     Xem trên trang web</a>
                             </td>
                         </tr>
@@ -44,8 +44,8 @@
             </tr>
             <tr>
                 <td align="center" bgcolor="#ffffff" style="padding: 40px 20px 40px 20px; color: #555555; font-family: Arial, sans-serif; font-size: 20px; line-height: 30px; border-bottom: 1px solid #f6f6f6;">
-                    <b>Cảm ơn [[${name}]] đã liên hệ...</b><br/>
-                    Chúng tôi sẽ liên hệ với <b>[[${name}]]</b> sớm nhất có thể qua email <i>[[${email}]]</i> bạn đã chia sẻ
+                    <b>Cảm ơn [[${contactMessage.name}]] đã liên hệ...</b><br/>
+                    Chúng tôi sẽ liên hệ với <b>[[${contactMessage.name}]]</b> sớm nhất có thể qua email <i>[[${contactMessage.email}]]</i> bạn đã chia sẻ
                 </td>
             </tr>
             <tr>
@@ -55,9 +55,9 @@
             </tr>
             <tr>
                 <td bgcolor="#ffffff" style="padding: 10px 20px 20px 20px; color: #555555; font-family: Arial, sans-serif; font-size: 15px; line-height: 24px; border-bottom: 1px solid #f6f6f6;">
-                    [[${message}]]
+                    [[${contactMessage.message}]]
                     <br>
-                    <i>Lúc: [[${time}]]</i>
+                    <i>Lúc: [[${contactMessage.time}]]</i>
                 </td>
             </tr>
             <tr>
@@ -70,7 +70,7 @@
                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                         <tr>
                             <td align="center" width="100%" style="color: #999999; font-family: Arial, sans-serif; font-size: 12px;">
-                                2022 &copy; <a th:href="${@environment.getProperty('app.hostProtocol')} + '://' + ${@environment.getProperty('app.hostName')}" style="color: #27ae60;">[[${@environment.getProperty('app.hostName')}]]</a>
+                                2022 &copy; <a th:href="${appProps.hostProtocol} + '://' + ${appProps.hostName}" style="color: #27ae60;">[[${appProps.hostName}]]</a>
                             </td>
                         </tr>
                     </table>
