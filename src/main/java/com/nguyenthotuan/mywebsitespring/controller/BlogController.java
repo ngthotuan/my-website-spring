@@ -4,16 +4,15 @@ import com.nguyenthotuan.mywebsitespring.domain.blog.Article;
 import com.nguyenthotuan.mywebsitespring.domain.blog.Category;
 import com.nguyenthotuan.mywebsitespring.service.ArticleService;
 import com.nguyenthotuan.mywebsitespring.service.CategoryService;
+import com.nguyenthotuan.mywebsitespring.service.StorageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +23,10 @@ public class BlogController {
 
     private final CategoryService categoryService;
     private final ArticleService articleService;
+
+    private final StorageService storageService;
+
+    public static final String STATIC_FILE_PATH = "static";
 
     @GetMapping
     public String getBlogs(Model model,
@@ -62,5 +65,11 @@ public class BlogController {
         model.addAttribute("article", article);
         model.addAttribute("categories", categoryService.findAll());
         return "blog/detail";
+    }
+
+    @GetMapping(STATIC_FILE_PATH + "/{filename:.+}")
+    @ResponseBody
+    public Resource getStaticFile(@PathVariable String filename) {
+        return storageService.loadResource(STATIC_FILE_PATH + "/" + filename);
     }
 }

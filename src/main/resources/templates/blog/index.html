@@ -40,7 +40,7 @@
                 <div th:each="article: ${articles}" class="col-lg-6 mb-4">
                     <div class="card h-100">
                         <a th:href="'/blog/' + ${article.slug}">
-                            <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg"
+                            <img class="card-img-top" style="height: 300px" th:src="'/blog/static/' + ${article.image}"
                                  th:alt="${article.shortDescription}" /></a>
                         <div class="card-body">
                             <div class="small text-muted">Sứa đổi lần cuối: [[${article.createdAt}]]</div>

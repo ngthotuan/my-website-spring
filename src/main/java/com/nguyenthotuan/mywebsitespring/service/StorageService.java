@@ -11,6 +11,8 @@ public interface StorageService {
 
     void store(MultipartFile file, String fileName);
 
+    void store(MultipartFile file, String relativePath, String fileName);
+
     Resource loadResource(String fileName);
 
     void delete(String fileName);

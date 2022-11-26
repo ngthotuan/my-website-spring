@@ -48,14 +48,20 @@ public class FileSystemStorageServiceImpl implements StorageService {
         }
         Path destinationFile = this.rootLocation.resolve(Paths.get(fileName))
                 .normalize().toAbsolutePath();
-        if (!destinationFile.getParent().equals(rootLocation.toAbsolutePath())) {
+        if (!destinationFile.getParent().startsWith(rootLocation.toAbsolutePath())) {
             throw new StorageException("Can't store file outside current directory");
         }
         try {
+            Files.createDirectories(destinationFile.getParent());
             file.transferTo(destinationFile);
         } catch (IOException e) {
             throw new StorageException("Fail to store file", e);
         }
+    }
+
+    @Override
+    public void store(MultipartFile file, String relativePath, String fileName) {
+        this.store(file, Paths.get(relativePath, fileName).toString());
     }
 
     @Override

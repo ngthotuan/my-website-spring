@@ -24,7 +24,7 @@ public class Article {
     private String image;
     private String slug;
     private String title;
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "LONGTEXT")
     private String content;
     private String shortDescription;
     private boolean published = true;
