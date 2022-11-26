@@ -12,4 +12,5 @@ public class AppProperties {
     private String hostName;
     private String hostProtocol;
     private String uploadLocation;
+    private String emailSenderName;
 }

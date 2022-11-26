@@ -28,6 +28,11 @@ ENV DB_PASSWORD=root
 ENV APP_HOST_NAME=localhost:8080
 ENV APP_HOST_PROTOCOL=http
 ENV APP_UPLOAD_LOCATION=user-upload
+ENV APP_EMAIL_SENDER_NAME='no-reply'
+ENV MAIL_HOST=smtp.gmail.com
+ENV MAIL_USER=test@gmail.com
+ENV MAIL_PASSWORD=123
+ENV MAIL_PORT=587
 
 EXPOSE 8080
 COPY --from=build /app/target/*.jar ./

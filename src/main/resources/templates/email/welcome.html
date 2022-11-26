@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>[[ ${@environment.getProperty('app.hostName')} ]] - Welcome</title>
+        <title>[[ ${appProps.hostName} ]] - Welcome</title>
         <meta name="viewport" content="width=device-width" />
        <style type="text/css">
             @media only screen and (max-width: 550px), screen and (max-device-width: 550px) {
@@ -30,7 +30,7 @@
                         <tr>
                             <td align="center" style="color: #aaaaaa; font-family: Arial, sans-serif; font-size: 12px;">
                                 Email hiện thị không đúng ?
-                                <a th:href="${@environment.getProperty('app.hostProtocol')} + '://' + ${@environment.getProperty('app.hostName')}" style="color: #27ae60;">
+                                <a th:href="${appProps.hostProtocol} + '://' + ${appProps.hostName}" style="color: #27ae60;">
                                     Xem trên trang web</a>
                             </td>
                         </tr>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td align="center" bgcolor="#ffffff" style="padding: 40px 20px 40px 20px; color: #555555; font-family: Arial, sans-serif; font-size: 20px; line-height: 30px; border-bottom: 1px solid #f6f6f6;">
-                    <b>Cảm ơn [[${email}]] đã đăng ký nhận tin tức tại [[ ${@environment.getProperty('app.hostName')} ]]</b><br/>
+                    <b>Cảm ơn [[${email}]] đã đăng ký nhận tin tức tại [[ ${appProps.hostName} ]]</b><br/>
                 </td>
             </tr>
             <tr>
@@ -65,7 +65,7 @@
                                 <a href="#" style="color: #27ae60;">Unsubscribe</a> from this newsletter
                             </td>
                             <td align="center" width="100%" style="color: #999999; font-family: Arial, sans-serif; font-size: 12px;">
-                                2022 &copy; <a th:href="${@environment.getProperty('app.hostProtocol')} + '://' + ${@environment.getProperty('app.hostName')}" style="color: #27ae60;">[[${@environment.getProperty('app.hostName')}]]</a>
+                                2022 &copy; <a th:href="${appProps.hostProtocol} + '://' + ${appProps.hostName}" style="color: #27ae60;">[[${appProps.hostName}]]</a>
                             </td>
                         </tr>
                     </table>

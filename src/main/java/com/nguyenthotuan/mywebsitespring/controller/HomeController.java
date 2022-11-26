@@ -1,11 +1,17 @@
 package com.nguyenthotuan.mywebsitespring.controller;
 
+import com.nguyenthotuan.mywebsitespring.config.AppProperties;
 import com.nguyenthotuan.mywebsitespring.domain.User;
+import com.nguyenthotuan.mywebsitespring.model.MailDto;
 import com.nguyenthotuan.mywebsitespring.model.UserLoginDto;
 import com.nguyenthotuan.mywebsitespring.model.UserRegisterDto;
+import com.nguyenthotuan.mywebsitespring.service.EmailSenderService;
 import com.nguyenthotuan.mywebsitespring.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -15,14 +21,24 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/")
 @RequiredArgsConstructor
+@Slf4j
 public class HomeController {
 
     private final UserService userService;
     private final HttpSession session;
+    private final EmailSenderService emailSenderService;
+    private final AppProperties appProperties;
+
+    @Value("${spring.mail.username}")
+    private String from;
 
     @GetMapping
     public String getHomePage() {
@@ -102,5 +118,27 @@ public class HomeController {
         session.removeAttribute("username");
         session.removeAttribute("name");
         return "redirect:/";
+    }
+
+    @PostMapping("subscribe")
+    public ResponseEntity<?> postSubscribe(@RequestParam String email) {
+        try {
+            Map<String, Object> properties = new HashMap<>();
+            properties.put("appProps", appProperties);
+            properties.put("email", email);
+            properties.put("time", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now()));
+            MailDto mailDto = MailDto.builder()
+                    .from(String.format("%s <%s>", appProperties.getEmailSenderName(), from))
+                    .to(email)
+                    .subject("Đăng ký nhận tin")
+                    .template("email/welcome")
+                    .props(properties)
+                    .build();
+            emailSenderService.sendEmail(mailDto);
+            return ResponseEntity.ok("Đăng ký thành công");
+        } catch (Exception e) {
+            log.error("postSubscribe error: ", e);
+            return ResponseEntity.badRequest().body("Đăng ký thất bại");
+        }
     }
 }
