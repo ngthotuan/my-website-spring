@@ -7,33 +7,35 @@
 <body>
 <!-- Blog Section-->
 <div th:fragment="widget" class="col-lg-4">
-    <!-- Search widget-->
-    <div class="card mb-4">
-        <div class="card-header">Tìm kiếm bài viết</div>
-        <div class="card-body">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Nhập từ khóa..." aria-label="Enter search term..." aria-describedby="button-search" />
-                <button class="btn btn-primary" id="button-search" type="button">Tìm kiếm</button>
+    <div style="position: sticky; top: 60px;" >
+        <!-- Search widget-->
+        <div class="card mb-4">
+            <div class="card-header">Tìm kiếm bài viết</div>
+            <div class="card-body">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Nhập từ khóa..." aria-label="Enter search term..." aria-describedby="button-search" />
+                    <button class="btn btn-primary" id="button-search" type="button">Tìm kiếm</button>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Categories widget-->
-    <div class="card mb-4">
-        <div class="card-header">Chuyên mục</div>
-        <div class="card-body">
-            <ul class="list-inline">
-                <li th:each="category:${categories}" class="list-inline-item">
-                    <a th:href="'/blog/?category=' + ${category.slug}">[[${category.name}]]</a>
-                </li>
-            </ul>
+        <!-- Categories widget-->
+        <div class="card mb-4">
+            <div class="card-header">Chuyên mục</div>
+            <div class="card-body">
+                <ul class="list-inline">
+                    <li th:each="category:${categories}" class="list-inline-item">
+                        <a th:href="'/blog/?category=' + ${category.slug}">[[${category.name}]]</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <!-- Side widget-->
-    <div class="card mb-4">
-        <div class="card-header">Thông tin tác giả</div>
-        <div class="card-body">
-            <p>Nguyễn Thọ Tuấn</p>
-            <p>HCMUS</p>
+        <!-- Side widget-->
+        <div class="card mb-4">
+            <div class="card-header">Thông tin tác giả</div>
+            <div class="card-body">
+                <p>Nguyễn Thọ Tuấn</p>
+                <p>HCMUS</p>
+            </div>
         </div>
     </div>
 </div>

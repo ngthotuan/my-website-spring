@@ -48,6 +48,9 @@
                 <button class="btn btn-outline-disabled text-light">
                     Hi, <span th:text="${session.name}">name</span>
                 </button>
+                <a th:if="${session.role == 'ADMIN'}" href="/admin/blog/edit">
+                    <button class="btn btn-outline-success">Viết bài</button>
+                </a>
                 <a href="/logout">
                     <button class="btn btn-outline-danger">Đăng xuất</button>
                 </a>
