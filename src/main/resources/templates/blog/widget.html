@@ -12,10 +12,13 @@
         <div class="card mb-4">
             <div class="card-header">Tìm kiếm bài viết</div>
             <div class="card-body">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Nhập từ khóa..." aria-label="Enter search term..." aria-describedby="button-search" />
-                    <button class="btn btn-primary" id="button-search" type="button">Tìm kiếm</button>
-                </div>
+                <form class="input-group">
+                    <input class="form-control" name="search" type="text"
+                           th:value="${search != null ? search : ''}"
+                           placeholder="Nhập từ khóa..." aria-label="Enter search term..."
+                           aria-describedby="button-search" />
+                    <button class="btn btn-primary">Tìm kiếm</button>
+                </form>
             </div>
         </div>
         <!-- Categories widget-->

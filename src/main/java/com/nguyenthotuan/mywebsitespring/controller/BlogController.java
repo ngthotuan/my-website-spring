@@ -10,6 +10,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,8 @@ public class BlogController {
     public String getBlogs(Model model,
                            @RequestParam(required = false) String category,
                            @RequestParam(required = false, defaultValue = "1") int page,
-                           @RequestParam(required = false, defaultValue = "4") int size) {
+                           @RequestParam(required = false, defaultValue = "4") int size,
+                           @RequestParam(required = false) String search) {
         List<Category> categories = categoryService.findAll();
         if (page < 1) {
             page = 1;
@@ -40,9 +42,11 @@ public class BlogController {
         if (size < 1) {
             size = 4;
         }
-        Pageable pageable = PageRequest.of(page - 1, size);
+        Pageable pageable = PageRequest.of(page - 1, size, Sort.by("createdAt").descending());
         Page<Article> articlePage;
-        if (category != null) {
+        if (search != null && !search.isEmpty()) {
+            articlePage = articleService.findAllPublished(pageable, search);
+        } else if (category != null) {
             articlePage = articleService.findAllPublishedByCategory(category, pageable);
         } else {
             articlePage = articleService.findAllPublished(pageable);
@@ -52,6 +56,7 @@ public class BlogController {
         model.addAttribute("category", category);
         model.addAttribute("page", page);
         model.addAttribute("size", size);
+        model.addAttribute("search", search);
         model.addAttribute("totalPages", articlePage.getTotalPages());
         return "blog/index";
     }

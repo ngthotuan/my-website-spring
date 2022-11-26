@@ -8,6 +8,8 @@ public interface ArticleService {
     Page<Article> findAll(Pageable pageable);
 
     Page<Article> findAllPublished(Pageable pageable);
+
+    Page<Article> findAllPublished(Pageable pageable, String search);
     Page<Article> findAllPublishedByCategory(String categorySlug, Pageable pageable);
 
     Article findBySlug(String slug);

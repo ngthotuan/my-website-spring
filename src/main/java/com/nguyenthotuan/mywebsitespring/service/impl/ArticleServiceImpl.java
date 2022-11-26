@@ -26,6 +26,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public Page<Article> findAllPublished(Pageable pageable, String search) {
+        return repo.findAllByPublishedAndTitleContainsIgnoreCase(true, search, pageable);
+    }
+
+    @Override
     public Page<Article> findAllPublishedByCategory(String categorySlug, Pageable pageable) {
         return repo.findByPublishedAndCategories_Slug(true, categorySlug, pageable);
     }

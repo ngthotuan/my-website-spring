@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.nguyenthotuan.mywebsitespring.controller.BlogController.STATIC_FILE_PATH;
@@ -100,6 +101,7 @@ public class AdminController {
             }
             article.setImage(imageFileName);
         }
+        article.setUpdatedAt(LocalDateTime.now());
         articleService.save(article);
         return "redirect:/blog";
     }

@@ -43,7 +43,8 @@
                             <img class="card-img-top" style="height: 300px" th:src="'/blog/static/' + ${article.image}"
                                  th:alt="${article.shortDescription}" /></a>
                         <div class="card-body">
-                            <div class="small text-muted">Sứa đổi lần cuối: [[${article.createdAt}]]</div>
+                            <div class="small text-muted">Viết: [[${article.createdAt}]] - Sửa đối: [[${article.updatedAt}]]
+                            </div>
                             <h2 class="card-title h4"><a th:href="'/blog/' + ${article.slug}">
                                 [[${article.title}]]
                             </a></h2>
@@ -58,14 +59,20 @@
             <nav aria-label="Pagination" th:if="${articles.size() != 0}">
                 <ul class="pagination justify-content-center my-4">
                     <li th:class="'page-item ' + ${page == 1 ? 'disabled' : ''}">
-                        <a class="page-link" th:href="'/blog?page=1' + '&size=' + ${size} + ${category != null ? '&category=' + category : ''}">Đầu</a>
+                        <a class="page-link" th:href="'/blog?page=1' + '&size=' + ${size}
+                                    + ${category != null ? '&category=' + category : ''}
+                                    + ${search != null ? '&search=' + search : ''}">Đầu</a>
                     </li>
                     <li th:each="p: ${#numbers.sequence(1, totalPages)}"
                         th:class="'page-item ' + ${p == page ? 'active' : ''}">
-                        <a class="page-link" th:href="'/blog?page=' + ${p} + '&size=' + ${size} + ${category != null ? '&category=' + category : ''}">[[${p}]]</a>
+                        <a class="page-link" th:href="'/blog?page=' + ${p} + '&size=' + ${size}
+                                    + ${category != null ? '&category=' + category : ''}
+                                    + ${search != null ? '&search=' + search : ''}">[[${p}]]</a>
                     </li>
                     <li th:class="'page-item ' + ${page == totalPages ? 'disabled' : ''}">
-                        <a class="page-link" th:href="'/blog?page=' + ${totalPages} + '&size=' + ${size} + ${category != null ? '&category=' + category : ''}">Cuối</a>
+                        <a class="page-link" th:href="'/blog?page=' + ${totalPages} + '&size=' + ${size}
+                                    + ${category != null ? '&category=' + category : ''}
+                                    + ${search != null ? '&search=' + search : ''}">Cuối</a>
                     </li>
                 </ul>
             </nav>
