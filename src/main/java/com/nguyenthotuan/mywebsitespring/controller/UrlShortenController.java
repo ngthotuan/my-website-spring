@@ -32,7 +32,8 @@ public class UrlShortenController {
         UrlShorten urlShorten = new UrlShorten();
         BeanUtils.copyProperties(urlShortenDto, urlShorten);
         urlShortenService.save(urlShorten);
-        model.addAttribute("fullUrl", String.format("http://%s/go/%s", appProperties.getHostName(), urlShorten.getShortUrl()));
+        model.addAttribute("fullUrl", String.format("%s://%s/go/%s", appProperties.getHostProtocol(),
+                appProperties.getHostName(), urlShorten.getShortUrl()));
         return "url-shorten/success";
     }
 

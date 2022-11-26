@@ -10,5 +10,6 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "app")
 public class AppProperties {
     private String hostName;
+    private String hostProtocol;
     private String uploadLocation;
 }

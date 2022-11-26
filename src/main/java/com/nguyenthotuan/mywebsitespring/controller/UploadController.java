@@ -39,7 +39,7 @@ public class UploadController {
         //store file
         FileUpload fileUpload = doSaveFile(fileUploadDto);
 
-        model.addAttribute("fileUrl", String.format("http://%s/upload/%s", appProperties.getHostName(), fileUpload.getSaveName()));
+        model.addAttribute("fileUrl", String.format("%s://%s/upload/%s", appProperties.getHostProtocol(), appProperties.getHostName(), fileUpload.getSaveName()));
         return "upload/success";
     }
 
