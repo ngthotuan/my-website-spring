@@ -4,7 +4,27 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
-    <title>[[${article.title}]]</title>
+    <title>[[${article.title} + ' | ' + ${@environment.getProperty('app.hostName')}]]</title>
+    <meta name="excerpt" th:content="${article.shortDescription}">
+    <meta name="description" th:content="${article.shortDescription}">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:site_name" th:content="${@environment.getProperty('app.hostName')}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" th:content="${article.title} + ' | ' + ${@environment.getProperty('app.hostName')}" />
+    <meta property="og:description" th:content="${article.shortDescription}" />
+    <meta property="og:url" th:content="${@environment.getProperty('app.hostProtocol')} + '://' + ${@environment.getProperty('app.hostName')} + '/blog/' + ${article.slug}" />
+    <meta property="og:image" th:content="${@environment.getProperty('app.hostProtocol')} + '://' + ${@environment.getProperty('app.hostName')} + '/blog/static/' + ${article.image}">
+    <meta property="og:image:secure_url" th:content="${@environment.getProperty('app.hostProtocol')} + '://' + ${@environment.getProperty('app.hostName')} + '/blog/static/' + ${article.image}">
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="300">
+    <meta property="article:published_time" th:content="${article.createdAt}">
+    <meta property="article:modified_time" th:content="${article.updatedAt}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" th:content="${@environment.getProperty('app.hostName')}">
+    <meta name="twitter:title" th:content="${article.title} + ' | ' + ${@environment.getProperty('app.hostName')}">
+    <meta name="twitter:description" th:content="${article.shortDescription}">
+    <meta name="twitter:creator" th:content="${@environment.getProperty('app.hostName')}">
+    <meta name="twitter:image" th:content="${@environment.getProperty('app.hostProtocol')} + '://' + ${@environment.getProperty('app.hostName')} + '/blog/static/' + ${article.image}">
     <link rel="stylesheet" th:href="@{/css/prism.css}">
 </head>
 <body>
@@ -84,4 +104,4 @@
 </th:block>
 </body>
 </html>
- 
+
