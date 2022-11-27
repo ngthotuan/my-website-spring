@@ -5,6 +5,7 @@
       layout:decorate="~{layout}">
 <head>
     <title>[[${article.title}]]</title>
+    <link rel="stylesheet" th:href="@{/css/prism.css}">
 </head>
 <body>
 <!-- Blog detail Section-->
@@ -78,5 +79,9 @@
     </div>
 </div>
 <!-- Blog detail Section -->
+<th:block layout:fragment="script">
+    <script th:src="@{/js/prism.js}"></script>
+</th:block>
 </body>
 </html>
+ 
