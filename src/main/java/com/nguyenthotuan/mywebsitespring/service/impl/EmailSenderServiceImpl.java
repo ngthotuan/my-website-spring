@@ -32,7 +32,7 @@ public class EmailSenderServiceImpl implements EmailSenderService {
 
         String html = getHtmlContent(mailDto);
 
-        helper.setTo(mailDto.getTo());
+        helper.setTo(mailDto.getTo().split(","));
         helper.setFrom(mailDto.getFrom());
         helper.setSubject(mailDto.getSubject());
         helper.setText(html, true);

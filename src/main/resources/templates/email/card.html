@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            /* Change your font family */
+            font-family: sans-serif;
+        }
+
+        .content-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            min-width: 400px;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .content-table thead tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .content-table th,
+        .content-table td {
+            padding: 12px 15px;
+        }
+
+        .content-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .content-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .content-table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+    </style>
+</head>
+<body>
+<h4>Thank you for shopping with us, here is your cards for #[[${cbData.orderNumber}]]</h4>
+<table class="content-table">
+    <thead>
+    <tr>
+        <th>SerialNumber</th>
+        <th>Password</th>
+        <th>Denomination</th>
+        <th>Currency</th>
+        <th>ExpiredDate</th>
+        <th>CardType</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="card: ${cbData.listCards}">
+        <td>[[${card.serialNumber}]]</td>
+        <td>[[${card.password}]]</td>
+        <td>[[${card.denomination}]]</td>
+        <td>[[${card.currency}]]</td>
+        <td>[[${card.expiredDate}]]</td>
+        <td>[[${card.cardType}]]</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
